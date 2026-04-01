@@ -1,0 +1,146 @@
+<!-- Add after hero section -->
+<section class="referral-section" id="referral">
+    <div class="container">
+        <h2>Earn More with Referrals</h2>
+        <div class="referral-card">
+            <div class="referral-info">
+                <h3>Invite Friends, Earn Ksh 50 Each</h3>
+                <p>Share your unique referral code. When your friend registers and completes their first paid article, you get Ksh 50 bonus!</p>
+                <div class="referral-code-box" id="referralBox" style="display:none;">
+                    <span class="referral-label">Your Code:</span>
+                    <span class="referral-code" id="referralCode">-</span>
+                    <button class="btn-copy" onclick="copyReferral()">Copy</button>
+                </div>
+                <div class="referral-stats" id="referralStats" style="display:none;">
+                    <div class="ref-stat">
+                        <span class="ref-number" id="refCount">0</span>
+                        <span class="ref-label">Friends Joined</span>
+                    </div>
+                    <div class="ref-stat">
+                        <span class="ref-number" id="refEarnings">Ksh 0</span>
+                        <span class="ref-label">Bonus Earned</span>
+                    </div>
+                </div>
+            </div>
+            <div class="referral-visual">
+                <div class="referral-arrow">👥 → 💰</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Add to auth modal register form -->
+<div class="form-group">
+    <input type="text" id="referralInput" placeholder="Referral Code (Optional)">
+</div>
+<div class="g-recaptcha" data-sitekey="YOUR_RECAPTCHA_SITE_KEY"></div>
+
+<!-- Add password field to registration -->
+<div class="form-group">
+    <input type="password" id="regPassword" placeholder="Create Password" required minlength="8">
+    <small class="password-hint">Min 8 characters, include numbers & symbols</small>
+</div>
+
+<!-- Enhanced payment modal -->
+<div id="paymentModal" class="modal">
+    <div class="modal-content payment-modal">
+        <h3>🚀 Upgrade to Premium Writer</h3>
+        <div class="upgrade-benefits">
+            <h4>Unlock Unlimited Earning Potential:</h4>
+            <ul>
+                <li>✓ Unlimited article submissions</li>
+                <li>✓ Ksh 250 per approved article</li>
+                <li>✓ Withdraw earnings anytime (min Ksh 1,000)</li>
+                <li>✓ Priority review (faster approval)</li>
+                <li>✓ Referral bonuses (Ksh 50 per friend)</li>
+            </ul>
+        </div>
+        
+        <div class="payment-amount">
+            <span class="amount-label">One-time Registration Fee</span>
+            <span class="amount-value">Ksh 350</span>
+        </div>
+
+        <div class="till-info">
+            <div class="till-label">Pay via M-Pesa</div>
+            <div class="till-steps">
+                <p>1. Go to M-Pesa → Lipa na M-Pesa → Buy Goods</p>
+                <p>2. Enter Till Number: <strong>123456</strong></p>
+                <p>3. Enter Amount: <strong>350</strong></p>
+                <p>4. Enter your M-Pesa PIN</p>
+            </div>
+        </div>
+
+        <form id="paymentForm" onsubmit="processPayment(event)">
+            <div class="form-group">
+                <label>M-Pesa Confirmation Code</label>
+                <input type="text" id="mpesaCode" placeholder="e.g., QJ7H9X2P" 
+                       pattern="[A-Za-z0-9]{8,12}" required>
+                <small>Found in your M-Pesa SMS confirmation</small>
+            </div>
+            <button type="submit" class="btn-primary btn-large">
+                <span id="payBtnText">Verify Payment</span>
+                <span id="paySpinner" class="spinner" style="display:none;">⏳</span>
+            </button>
+        </form>
+
+        <div class="payment-status" id="paymentStatus" style="display:none;">
+            <div class="status-progress">
+                <div class="progress-step active" id="step1">
+                    <div class="step-icon">📝</div>
+                    <div class="step-text">Received</div>
+                </div>
+                <div class="progress-line"></div>
+                <div class="progress-step" id="step2">
+                    <div class="step-icon">🔍</div>
+                    <div class="step-text">Verifying</div>
+                </div>
+                <div class="progress-line"></div>
+                <div class="progress-step" id="step3">
+                    <div class="step-icon">✓</div>
+                    <div class="step-text">Active</div>
+                </div>
+            </div>
+            <p class="status-message" id="statusMessage">Processing your payment...</p>
+        </div>
+
+        <div class="payment-help">
+            <p>Payment issues? <a href="https://wa.me/254712345678" target="_blank">Chat on WhatsApp</a></p>
+        </div>
+    </div>
+</div>
+
+<!-- Withdrawal Modal -->
+<div id="withdrawModal" class="modal">
+    <div class="modal-content">
+        <h3>💰 Withdraw Earnings</h3>
+        <div class="withdrawal-info">
+            <div class="info-row">
+                <span>Available Balance:</span>
+                <strong id="withdrawBalance">Ksh 0</strong>
+            </div>
+            <div class="info-row">
+                <span>Minimum Withdrawal:</span>
+                <strong>Ksh 1,000</strong>
+            </div>
+        </div>
+        
+        <form id="withdrawForm" onsubmit="processWithdrawal(event)">
+            <div class="form-group">
+                <label>Amount (Ksh)</label>
+                <input type="number" id="withdrawAmount" min="1000" step="50" required>
+            </div>
+            <div class="form-group">
+                <label>M-Pesa Number</label>
+                <input type="tel" id="withdrawPhone" placeholder="07XX XXX XXX" 
+                       pattern="0[17]\d{8}" required>
+            </div>
+            <button type="submit" class="btn-primary">Request Withdrawal</button>
+        </form>
+        
+        <div class="withdrawal-note">
+            <p>⏱️ Processing time: 24-48 hours</p>
+            <p>📱 You'll receive M-Pesa confirmation once processed</p>
+        </div>
+    </div>
+</div>
