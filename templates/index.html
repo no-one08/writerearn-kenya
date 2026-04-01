@@ -61,14 +61,12 @@
             <span class="amount-value">Ksh 350</span>
         </div>
 
-        <div class="till-info">
-            <div class="till-label">Pay via M-Pesa</div>
-            <div class="till-steps">
-                <p>1. Go to M-Pesa → Lipa na M-Pesa → Buy Goods</p>
-                <p>2. Enter Till Number: <strong>123456</strong></p>
-                <p>3. Enter Amount: <strong>350</strong></p>
-                <p>4. Enter your M-Pesa PIN</p>
-            </div>
+        <div class="till-steps">
+    <p>1. Go to M-Pesa → Lipa na M-Pesa → Buy Goods</p>
+    <p>2. Enter Till Number: <strong>{{ till_number }}</strong></p>
+    <p>3. Enter Amount: <strong>350</strong></p>
+    <p>4. Enter your M-Pesa PIN</p>
+</div>
         </div>
 
         <form id="paymentForm" onsubmit="processPayment(event)">
